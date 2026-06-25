@@ -94,13 +94,13 @@ public class SecurityConfig {
         config.setAllowedOriginPatterns(List.of(
                 "http://127.0.0.1:5500",
                 "http://localhost:5500",
-                "https://code-track-frontend-5143.vercel.app",
-                "https://code-track-frontend-5143-*.vercel.app"
+                "https://codetrack-new.vercel.app",
+                "https://codetrack-new-*.vercel.app"
         ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
-
+    
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
         return source;
