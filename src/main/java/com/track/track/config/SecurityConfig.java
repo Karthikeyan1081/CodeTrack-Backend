@@ -65,6 +65,7 @@ public class SecurityConfig {
                         .hasAnyAuthority("ADMIN")
 
                         // STATIC PAGES
+                        // STATIC PAGES
                         .requestMatchers(
                                 "/*.html",
                                 "/*.css",
@@ -75,7 +76,10 @@ public class SecurityConfig {
                                 "/favicon.ico",
                                 "/"
                         ).permitAll()
-
+                        
+                        // TEMP DEBUG — REMOVE AFTER TESTING
+                        .requestMatchers("/students/export/**").permitAll()
+                        
                         // EVERYTHING ELSE REQUIRES LOGIN
                         .anyRequest().authenticated()
                 )
