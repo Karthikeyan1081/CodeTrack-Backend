@@ -73,10 +73,8 @@ public class ExcelExportService {
         tr.setHeightInPoints(24);
         Cell tc = tr.createCell(0);
         tc.setCellValue(
-                "LEETCODE TRACKER — " +
-                        (students.isEmpty() ? "" :
-                                students.get(0).getDepartment() + " — ") +
-                        students.size() + " Students"
+            "LEETCODE TRACKER — " +
+            students.size() + " Students"
         );
         tc.setCellStyle(title);
         sheet.addMergedRegion(
@@ -153,10 +151,8 @@ public class ExcelExportService {
         tr.setHeightInPoints(24);
         Cell tc = tr.createCell(0);
         tc.setCellValue(
-                "CODE CHEF TRACKER — " +
-                        (students.isEmpty() ? "" :
-                                students.get(0).getDepartment() + " — ") +
-                        students.size() + " Students"
+            "CODE CHEF TRACKER — " +
+            students.size() + " Students"
         );
         tc.setCellStyle(title);
         sheet.addMergedRegion(
@@ -231,10 +227,8 @@ public class ExcelExportService {
         tr.setHeightInPoints(24);
         Cell tc = tr.createCell(0);
         tc.setCellValue(
-                "CODE FORCE TRACKER — " +
-                        (students.isEmpty() ? "" :
-                                students.get(0).getDepartment() + " — ") +
-                        students.size() + " Students"
+            "CODE FORCE TRACKER — " +
+            students.size() + " Students"
         );
         tc.setCellStyle(title);
         sheet.addMergedRegion(
