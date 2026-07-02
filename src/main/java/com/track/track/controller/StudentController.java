@@ -154,7 +154,9 @@ public class StudentController {
                 excelService.exportStudents(students);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION,
-                        "attachment; filename=students.xlsx")
+                    "attachment; filename=students.xlsx")
+                .header(HttpHeaders.CONTENT_TYPE,
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                 .body(new InputStreamResource(file));
     }
 
