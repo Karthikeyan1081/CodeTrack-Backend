@@ -35,7 +35,6 @@ public class StudentController {
 
     // ── CRUD ──
 
-    // Add student — auto-triggers async stats fetch
     @PostMapping("/add")
     public Student addStudent(
             @RequestBody Student student
@@ -78,13 +77,9 @@ public class StudentController {
         Student saved = studentService.updateStudent(
                 id, updatedStudent
         );
-
-        // If usernames were set/changed, trigger
-        // async stats refresh automatically
         if (saved != null && hasAnyUsername(saved)) {
             studentService.triggerStatsRefresh(saved.getId());
         }
-
         return saved;
     }
 
@@ -104,11 +99,9 @@ public class StudentController {
     ) {
         Student updated =
                 refreshService.refreshStudent(id);
-
         if (updated == null) {
             return ResponseEntity.notFound().build();
         }
-
         rankService.recalculateAllRanks();
         return ResponseEntity.ok(updated);
     }
@@ -146,6 +139,9 @@ public class StudentController {
 
     // ── EXPORT ──
 
+    private static final String EXCEL_CONTENT_TYPE =
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
     @GetMapping("/export")
     public ResponseEntity<InputStreamResource> exportExcel() {
         List<Student> students =
@@ -154,9 +150,9 @@ public class StudentController {
                 excelService.exportStudents(students);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION,
-                    "attachment; filename=students.xlsx")
+                        "attachment; filename=students.xlsx")
                 .header(HttpHeaders.CONTENT_TYPE,
-                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                        EXCEL_CONTENT_TYPE)
                 .body(new InputStreamResource(file));
     }
 
@@ -172,6 +168,8 @@ public class StudentController {
                 .header(HttpHeaders.CONTENT_DISPOSITION,
                         "attachment; filename=students_"
                                 + department + ".xlsx")
+                .header(HttpHeaders.CONTENT_TYPE,
+                        EXCEL_CONTENT_TYPE)
                 .body(new InputStreamResource(file));
     }
 
@@ -188,6 +186,8 @@ public class StudentController {
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION,
                         "attachment; filename=custom_students.xlsx")
+                .header(HttpHeaders.CONTENT_TYPE,
+                        EXCEL_CONTENT_TYPE)
                 .body(new InputStreamResource(file));
     }
 
@@ -206,24 +206,19 @@ public class StudentController {
                 .header(HttpHeaders.CONTENT_DISPOSITION,
                         "attachment; filename=custom_"
                                 + department + ".xlsx")
+                .header(HttpHeaders.CONTENT_TYPE,
+                        EXCEL_CONTENT_TYPE)
                 .body(new InputStreamResource(file));
     }
 
     // ── HELPER ──
 
     private boolean hasAnyUsername(Student s) {
-        return (s.getLeetcodeUsername()  != null &&
+        return (s.getLeetcodeUsername() != null &&
                 !s.getLeetcodeUsername().isBlank())
-                || (s.getCodechefUsername()  != null &&
+                || (s.getCodechefUsername() != null &&
                 !s.getCodechefUsername().isBlank())
-                || (s.getCodeforcesUsername()!= null &&
+                || (s.getCodeforcesUsername() != null &&
                 !s.getCodeforcesUsername().isBlank());
     }
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleExportError(Exception e) {
-        e.printStackTrace();
-        return ResponseEntity.status(500)
-                .body("Error: " + e.getClass().getName() + 
-                      " — " + e.getMessage());
-}
 }
