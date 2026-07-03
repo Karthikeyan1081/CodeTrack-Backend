@@ -77,9 +77,6 @@ public class SecurityConfig {
                                 "/"
                         ).permitAll()
                         
-                        // TEMP DEBUG — REMOVE AFTER TESTING
-                        .requestMatchers("/students/export/**").permitAll()
-                        
                         // EVERYTHING ELSE REQUIRES LOGIN
                         .anyRequest().authenticated()
                 )
