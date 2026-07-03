@@ -219,4 +219,11 @@ public class StudentController {
                 || (s.getCodeforcesUsername()!= null &&
                 !s.getCodeforcesUsername().isBlank());
     }
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleExportError(Exception e) {
+        e.printStackTrace();
+        return ResponseEntity.status(500)
+                .body("Error: " + e.getClass().getName() + 
+                      " — " + e.getMessage());
+}
 }
