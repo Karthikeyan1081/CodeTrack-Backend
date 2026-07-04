@@ -23,13 +23,11 @@ public class GitHubService {
             "https://api.github.com";
 
     private HttpEntity<?> authEntity() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization",
-                "Bearer " + githubToken);
-        headers.set("Accept",
-                "application/vnd.github+json");
-        return new HttpEntity<>(headers);
-    }
+    HttpHeaders headers = new HttpHeaders();
+    headers.set("Authorization", "token " + githubToken);
+    headers.set("Accept", "application/vnd.github+json");
+    return new HttpEntity<>(headers);
+}
 
     public GitHubStatsDto getGitHubStats(
             String username
