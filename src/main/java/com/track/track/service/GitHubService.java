@@ -16,7 +16,7 @@ public class GitHubService {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("${github.api.token}")
+    @Value("${github.api.token:}")
     private String githubToken;
 
     private static final String BASE =
