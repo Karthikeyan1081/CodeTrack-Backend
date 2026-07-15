@@ -54,14 +54,14 @@ public class CodeforcesService {
             String lastActive =
                     getLastActive(username);
 
-            return new CodeforcesStatsDto(
-                    currentRating,
-                    highestRating,
-                    globalRank,
-                    solved,
-                    contests,
-                    lastActive
-            );
+            CodeforcesStatsDto dto = new CodeforcesStatsDto();
+            dto.setCurrentRating(currentRating);
+            dto.setHighestRating(highestRating);
+            dto.setGlobalRank(globalRank);
+            dto.setTotalSolved(totalSolved);
+            dto.setContestsAttended(contestsAttended);
+            dto.setLastActive(lastActive);
+            return dto;
 
         } catch (Exception e) {
             return new CodeforcesStatsDto("N/A", "N/A", "N/A", "0", "N/A", "N/A");
