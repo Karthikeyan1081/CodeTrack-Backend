@@ -32,10 +32,17 @@ public class CodeChefService {
 
             String countryRank = extractCountryRank(doc);
 
-            return new CodeChefStatsDto(
-                    rating, highest, globalRank, countryRank,
-                    solved, contests, lastActive, stars, division
-            );
+            CodeChefStatsDto dto = new CodeChefStatsDto();
+            dto.setCurrentRating(currentRating);
+            dto.setHighestRating(highestRating);
+            dto.setGlobalRank(globalRank);
+            dto.setCountryRank(countryRank);
+            dto.setTotalSolved(totalSolved);
+            dto.setContestsAttended(contestsAttended);
+            dto.setLastActive(lastActive);
+            dto.setStars(stars);
+            dto.setDivision(division);
+            return dto;
 
         } catch (Exception e) {
             return new CodeChefStatsDto(
