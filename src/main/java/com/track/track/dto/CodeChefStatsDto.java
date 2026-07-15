@@ -12,23 +12,14 @@ public class CodeChefStatsDto {
     private String stars;
     private String division;
 
-    public CodeChefStatsDto() {}
+    // Last contest info
+    private String lastContestName;
+    private String lastContestDate;
+    private String lastContestRank;
+    private String lastContestSolved;
+    private String lastContestFinished;
 
-    public CodeChefStatsDto(String currentRating, String highestRating,
-                            String globalRank, String countryRank,
-                            String totalSolved, String contestsAttended,
-                            String lastActive, String stars,
-                            String division) {
-        this.currentRating    = currentRating;
-        this.highestRating    = highestRating;
-        this.globalRank       = globalRank;
-        this.countryRank      = countryRank;
-        this.totalSolved      = totalSolved;
-        this.contestsAttended = contestsAttended;
-        this.lastActive       = lastActive;
-        this.stars            = stars;
-        this.division         = division;
-    }
+    public CodeChefStatsDto() {}
 
     public String getCurrentRating()    { return currentRating; }
     public void setCurrentRating(String v)    { this.currentRating = v; }
@@ -48,4 +39,15 @@ public class CodeChefStatsDto {
     public void setStars(String v)            { this.stars = v; }
     public String getDivision()         { return division; }
     public void setDivision(String v)         { this.division = v; }
+
+    public String getLastContestName()     { return lastContestName; }
+    public void setLastContestName(String v)     { this.lastContestName = v; }
+    public String getLastContestDate()     { return lastContestDate; }
+    public void setLastContestDate(String v)     { this.lastContestDate = v; }
+    public String getLastContestRank()     { return lastContestRank; }
+    public void setLastContestRank(String v)     { this.lastContestRank = v; }
+    public String getLastContestSolved()   { return lastContestSolved; }
+    public void setLastContestSolved(String v)   { this.lastContestSolved = v; }
+    public String getLastContestFinished() { return lastContestFinished; }
+    public void setLastContestFinished(String v) { this.lastContestFinished = v; }
 }
