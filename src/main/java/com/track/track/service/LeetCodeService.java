@@ -111,11 +111,17 @@ public class LeetCodeService {
         String highestRating    = getHighestRating(contestHistory);
         String lastActive       = getLastActive(matchedUser);
 
-        return new LeetCodeStatsDto(
-                currentRating, highestRating, globalRank,
-                totalSolved, contestsAttended, lastActive,
-                easySolved, mediumSolved, hardSolved
-        );
+        LeetCodeStatsDto dto = new LeetCodeStatsDto();
+        dto.setCurrentRating(currentRating);
+        dto.setHighestRating(highestRating);
+        dto.setGlobalRank(globalRank);
+        dto.setTotalSolved(totalSolved);
+        dto.setContestsAttended(contestsAttended);
+        dto.setLastActive(lastActive);
+        dto.setEasySolved(easySolved);
+        dto.setMediumSolved(mediumSolved);
+        dto.setHardSolved(hardSolved);
+        return dto;
     }
 
     private String[] getAllSolved(Map<String, Object> matchedUser) {
