@@ -29,7 +29,6 @@ public class CodeChefService {
             String globalRank = extractGlobalRank(doc);
             String stars = extractStars(doc);
             String division = extractDivision(doc);
-
             String countryRank = extractCountryRank(doc);
 
             CodeChefStatsDto dto = new CodeChefStatsDto();
@@ -45,9 +44,17 @@ public class CodeChefService {
             return dto;
 
         } catch (Exception e) {
-            return new CodeChefStatsDto(
-                    "N/A","N/A","N/A","N/A","N/A","N/A","N/A","N/A","N/A"
-            );
+            CodeChefStatsDto dto = new CodeChefStatsDto();
+            dto.setCurrentRating("N/A");
+            dto.setHighestRating("N/A");
+            dto.setGlobalRank("N/A");
+            dto.setCountryRank("N/A");
+            dto.setTotalSolved("N/A");
+            dto.setContestsAttended("N/A");
+            dto.setLastActive("N/A");
+            dto.setStars("N/A");
+            dto.setDivision("N/A");
+            return dto;
         }
     }
 
@@ -154,20 +161,17 @@ public class CodeChefService {
         }
     }
 
-    // ---------------- ⭐ STARS ----------------
+    // ---------------- STARS ----------------
 
     private String extractStars(Document doc) {
         try {
-            // Star is shown next to username like "1★b23bec046kart"
-            // or in the rating section as a star icon
             Elements starElements = doc.select(".rating");
             for (Element el : starElements) {
                 String text = el.text();
-                long count = text.chars().filter(c -> c == '★').count();
-                if (count > 0) return "★".repeat((int) count);
+                long count = text.chars().filter(c -> c == '\u2605').count();
+                if (count > 0) return "\u2605".repeat((int) count);
             }
 
-            // Fallback: count ★ in full page but only in rating context
             String ratingSection = "";
             Elements ratingBox = doc.select(".rating-number");
             if (!ratingBox.isEmpty()) {
@@ -176,22 +180,21 @@ public class CodeChefService {
             }
 
             long starCount = ratingSection.chars()
-                    .filter(c -> c == '★').count();
-            if (starCount > 0) return "★".repeat((int) starCount);
+                    .filter(c -> c == '\u2605').count();
+            if (starCount > 0) return "\u2605".repeat((int) starCount);
 
-            // Rating-based fallback
             String ratingText = doc.select(".rating-number").text().trim();
             if (!ratingText.isEmpty()) {
                 int rating = Integer.parseInt(
                         ratingText.replaceAll("[^0-9]", "")
                 );
-                if (rating >= 2500) return "★★★★★★★";
-                if (rating >= 2200) return "★★★★★★";
-                if (rating >= 1800) return "★★★★★";
-                if (rating >= 1600) return "★★★★";
-                if (rating >= 1400) return "★★★";
-                if (rating >= 1200) return "★★";
-                return "★";
+                if (rating >= 2500) return "\u2605\u2605\u2605\u2605\u2605\u2605\u2605";
+                if (rating >= 2200) return "\u2605\u2605\u2605\u2605\u2605\u2605";
+                if (rating >= 1800) return "\u2605\u2605\u2605\u2605\u2605";
+                if (rating >= 1600) return "\u2605\u2605\u2605\u2605";
+                if (rating >= 1400) return "\u2605\u2605\u2605";
+                if (rating >= 1200) return "\u2605\u2605";
+                return "\u2605";
             }
 
             return "N/A";
@@ -200,7 +203,7 @@ public class CodeChefService {
         }
     }
 
-    // ---------------- 🌍 GLOBAL RANK ----------------
+    // ---------------- GLOBAL RANK ----------------
 
     private String extractGlobalRank(Document doc) {
         try {
