@@ -58,8 +58,8 @@ public class CodeforcesService {
             dto.setCurrentRating(currentRating);
             dto.setHighestRating(highestRating);
             dto.setGlobalRank(globalRank);
-            dto.setTotalSolved(totalSolved);
-            dto.setContestsAttended(contestsAttended);
+            dto.setTotalSolved(solved);
+            dto.setContestsAttended(contests);
             dto.setLastActive(lastActive);
             return dto;
 
