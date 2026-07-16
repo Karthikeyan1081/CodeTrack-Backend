@@ -64,7 +64,14 @@ public class CodeforcesService {
             return dto;
 
         } catch (Exception e) {
-            return new CodeforcesStatsDto("N/A", "N/A", "N/A", "0", "N/A", "N/A");
+            CodeforcesStatsDto dto = new CodeforcesStatsDto();
+            dto.setCurrentRating("N/A");
+            dto.setHighestRating("N/A");
+            dto.setGlobalRank("N/A");
+            dto.setTotalSolved("0");
+            dto.setContestsAttended("N/A");
+            dto.setLastActive("N/A");
+            return dto;
         }
     }
 
