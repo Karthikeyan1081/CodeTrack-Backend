@@ -250,8 +250,16 @@ public class LeetCodeService {
     }
 
     private LeetCodeStatsDto emptyDto() {
-        return new LeetCodeStatsDto(
-                "N/A","N/A","N/A","N/A","N/A","N/A","0","0","0"
-        );
+        LeetCodeStatsDto dto = new LeetCodeStatsDto();
+        dto.setCurrentRating("N/A");
+        dto.setHighestRating("N/A");
+        dto.setGlobalRank("N/A");
+        dto.setTotalSolved("0");
+        dto.setContestsAttended("N/A");
+        dto.setLastActive("N/A");
+        dto.setEasySolved("0");
+        dto.setMediumSolved("0");
+        dto.setHardSolved("0");
+        return dto;
     }
 }
